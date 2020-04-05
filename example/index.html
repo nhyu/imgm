@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+    <script src="../src/index.js"></script>
+    <style>
+        img {
+            outline: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div><img id="img" src="" alt=""></div>
+    <script>
+        const img = document.getElementById('img');
+        const im = new ImageMerge();
+        im.add({
+            img: './image/body.png',
+            sx: 56,
+            sy: 56,
+            sw: 200,
+            sh: 200,
+            x: 10,
+            y: 10,
+            w: 200,
+            h: 200,
+        });
+        im.draw().then(image => {
+            console.log(image);
+            img.src = image;
+        });
+    </script>
+</body>
+
+</html>

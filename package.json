@@ -1,6 +1,6 @@
 {
   "name": "imgm",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "使用JS合并图片、合并精灵图",
   "main": "src/index.js",
   "keywords": [

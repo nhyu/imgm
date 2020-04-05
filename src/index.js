@@ -27,7 +27,8 @@
  * 图拼合并工具
  * @module ImageMerge
  */
-export default class ImageMerge {
+// eslint-disable-next-line no-unused-vars
+class ImageMerge {
 
     /**
      * 创建图片合并工具的实例
