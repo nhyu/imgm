@@ -1,0 +1,28 @@
+{
+  "name": "imgm",
+  "version": "1.0.0",
+  "description": "使用JS合并图片、合并精灵图",
+  "main": "src/index.js",
+  "keywords": [
+    "merge image",
+    "合并图片",
+    "canvas 合并图片",
+    "JS 合并图片"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhyu/imgm.git"
+  },
+  "author": "nhyu<1061632045@qq.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nhyu/imgm/issues"
+  },
+  "homepage": "https://github.com/nhyu/imgm#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  }
+}
