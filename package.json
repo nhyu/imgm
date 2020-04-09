@@ -10,7 +10,8 @@
     "JS 合并图片"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,12 @@
   },
   "homepage": "https://github.com/nhyu/imgm#readme",
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-jest": "^25.2.6",
+    "eslint": "^6.8.0",
+    "jest": "^25.2.7",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   }
 }
