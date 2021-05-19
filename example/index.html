@@ -5,33 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Example</title>
-    <script src="../dist/main.js"></script>
+    <script src="../dist/imgm.js"></script>
     <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5dc;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         img {
-            outline: 1px solid red;
+            box-shadow: 0 0 10px 10px #ccc;
         }
     </style>
 </head>
 
 <body>
-    <div><img id="img" src="" alt=""></div>
     <script>
-        const img = document.getElementById('img');
         const im = new ImageMerge();
         im.add({
             img: './image/body.png',
-            sx: 56,
-            sy: 56,
-            sw: 200,
-            sh: 200,
-            x: 10,
-            y: 10,
-            w: 200,
-            h: 200,
+            sx: 0,
+            sy: 0,
+            sw: 256,
+            sh: 256,
+            x: 0,
+            y: 0,
+            w: 256,
+            h: 256,
         });
+        im.add([
+            { img: './image/eyes.png' },
+            { img: './image/mouth.png' },
+        ]);
         im.draw().then(image => {
-            console.log(image);
+            console.log("output image:", image);
+            const img = new Image;
             img.src = image;
+            document.body.appendChild(img);
         });
     </script>
 </body>

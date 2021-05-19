@@ -11,7 +11,9 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "webpack"
+    "build": "npm run build:dev && npm run build:prod",
+    "build:prod": "webpack --mode production --output dist/imgm.min.js",
+    "build:dev": "webpack --mode development --output dist/imgm.js"
   },
   "repository": {
     "type": "git",

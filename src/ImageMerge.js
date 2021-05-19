@@ -1,16 +1,15 @@
-
 /**
  * 图片的配置
  * @typedef {Object} ConfigImage
  * @property {string} ConfigImage.img 图片资源
- * @property {string} [ConfigImage.sx] 选取图片的x坐标
- * @property {string} [ConfigImage.sy] 选取图片的y坐标
- * @property {string} [ConfigImage.sw] 选取图片的宽度
- * @property {string} [ConfigImage.sh] 选取图片的高度
- * @property {string} [ConfigImage.x]  放到画布上的x坐标
- * @property {string} [ConfigImage.y]  放到画布上的y坐标
- * @property {string} [ConfigImage.w]  放到画布上的图像的宽度（伸展或缩小图像）
- * @property {string} [ConfigImage.h]  放到画布上的图像的高度（伸展或缩小图像）
+ * @property {number|string} [ConfigImage.sx] 选取图片的x坐标
+ * @property {number|string} [ConfigImage.sy] 选取图片的y坐标
+ * @property {number|string} [ConfigImage.sw] 选取图片的宽度
+ * @property {number|string} [ConfigImage.sh] 选取图片的高度
+ * @property {number|string} [ConfigImage.x]  放到画布上的x坐标
+ * @property {number|string} [ConfigImage.y]  放到画布上的y坐标
+ * @property {number|string} [ConfigImage.w]  放到画布上的图像的宽度（伸展或缩小图像）
+ * @property {number|string} [ConfigImage.h]  放到画布上的图像的高度（伸展或缩小图像）
  * TODO: 增加透明度
  */
 
@@ -19,6 +18,7 @@
  * @typedef {Object} ConfigText
  * @property {string} ConfigImage.text 要添加的文字
  */
+
 /**
  * 图片输出的类型
  * @typedef {"image/png"|"image/jpeg"|"image/webp"} outputType
@@ -42,10 +42,9 @@ export default class ImageMerge {
 
         // 备份所有图片资源
         this.imgs = [];
-        // 画布的宽度
-        this.width = width;
-        // 画布的高度
-        this.height = height;
+        // 画布的宽度、高度
+        this.canvasWidth = width;
+        this.canvasHeight = height;
 
         // 如果构造函数中就传入了配置，则在初始化完成后直接去处理
         [].concat(config).forEach((item = {}) => {
@@ -72,8 +71,8 @@ export default class ImageMerge {
                     const {
                         sx = 0,
                         sy = 0,
-                        sw = image.width,
-                        sh = image.height,
+                        sw = image.width - sx,
+                        sh = image.height - sy,
                         x = 0,
                         y = 0,
                         w = sw,
@@ -93,6 +92,7 @@ export default class ImageMerge {
      */
     text() {
         // TODO: 还需要支持添加文字
+        console.error('这个API还没开发完成。');
         return this;
     }
 
@@ -100,21 +100,21 @@ export default class ImageMerge {
      * 开始绘制
      * @public
      * @param {Object} putParam 绘制参数
-     * @param {outputType} [putParam.putType=image/png] 绘制参数
+     * @param {outputType} [putParam.putType='image/png'] 绘制参数
      * @param {number} [putParam.width] 画布的宽度
      * @param {number} [putParam.height] 画布的高度
      * @param {number} [putParam.dpi] 每英寸点数
      * @returns {Promise} 异步绘制
      */
-    draw({ putType = "image/png", width = 0, height = 0, dpi = 96 }) {
+    draw({ putType = "image/png", width = 0, height = 0, dpi = 96 } = {}) {
         return Promise.all(this.imgs)
             .then((imgs) => {
                 const { w, h } = imgs.reduce((pre, { config: { x, y, w, h } }) => ({
                     w: Math.max(pre.w, x + w),
                     h: Math.max(pre.h, y + h),
                 }), { w: 0, h: 0 });
-                this.canvas.width = width || this.width || w;
-                this.canvas.height = height || this.height || h;
+                this.canvas.width = width || this.canvasWidth || w;
+                this.canvas.height = height || this.canvasHeight || h;
 
                 imgs.forEach(img => this.drawImg(img));
                 return this.canvas.toDataURL(putType, dpi);
