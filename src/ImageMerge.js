@@ -80,6 +80,9 @@ export default class ImageMerge {
                     } = conf;
                     return Promise.resolve({ image, config: { sx, sy, sw, sh, x, y, w, h } });
                 })
+                .catch((err) => {
+                    return Promise.reject(err);
+                })
         );
         this.imgs.push(...loads);
         return this;
@@ -118,9 +121,6 @@ export default class ImageMerge {
 
                 imgs.forEach(img => this.drawImg(img));
                 return this.canvas.toDataURL(putType, dpi);
-            })
-            .catch(err => {
-                throw Error(err);
             });
     }
 
