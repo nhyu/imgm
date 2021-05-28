@@ -52,6 +52,8 @@ export default class ImageMerge {
                 this.add(item);
             } else if (item.text) {
                 this.text(item);
+            } else {
+                throw Error('请检查配置');
             }
         });
     }
